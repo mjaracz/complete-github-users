@@ -10,6 +10,7 @@ export function AutoComplete<Option>(
   const {
     label,
     showOptions,
+    isLoading,
     options,
     refAutoComplete,
     focusTextField,
@@ -32,6 +33,7 @@ export function AutoComplete<Option>(
         <span>provide username</span>
       </label>
       <OptionsList
+        isLoading={isLoading}
         options={options}
         optionKey={props.optionKey}
         showOptions={showOptions}

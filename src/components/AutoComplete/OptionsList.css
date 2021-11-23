@@ -16,6 +16,13 @@
     opacity: 1;
 }
 
+.optionsList__loader--container {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .optionsList__item {
     width: 180px;
     height: 40px;

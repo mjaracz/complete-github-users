@@ -6,6 +6,7 @@ import {
   MouseEvent,
   ChangeEvent,
 } from 'react';
+import { usersApi } from '../../api/users.api';
 
 export const useAutoComplete = <Option>(
   propsOptions: Option[],
@@ -13,7 +14,8 @@ export const useAutoComplete = <Option>(
 ) => {
   const [showOptions, setShowOptions] = useState<boolean>(false);
   const [options, setOptions] = useState<Option[]>(propsOptions);
-  const [label, setLabel] = useState<string>();
+  const [label, setLabel] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>();
   const refAutoComplete = createRef<HTMLDivElement>();
 
   const hiddenOptionsList = useCallback(
@@ -26,6 +28,19 @@ export const useAutoComplete = <Option>(
     },
     [refAutoComplete]
   );
+
+  useEffect(() => {
+    const { fetchUserByName } = usersApi();
+
+    async function getAsyncUserByName() {
+      setIsLoading(true);
+      const users = await fetchUserByName(label);
+      if (users.length > 0) setOptions(users);
+      setIsLoading(false);
+    }
+
+    if (label.length >= 3) getAsyncUserByName();
+  }, [label]);
 
   useEffect(() => {
     document.addEventListener('mousedown', hiddenOptionsList);
@@ -52,6 +67,7 @@ export const useAutoComplete = <Option>(
   return {
     label,
     showOptions,
+    isLoading,
     options,
     refAutoComplete,
     focusTextField,

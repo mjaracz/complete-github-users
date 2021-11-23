@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchUsers } from '../../api/fetchUsers';
+import { usersApi } from '../../api/users.api';
 
 export const useSearchingPage = () => {
   const [options, setOptions] = useState([
@@ -9,8 +9,9 @@ export const useSearchingPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>();
   useEffect(() => {
     async function saveAsyncUsers() {
+      const { fetchAllUsers } = usersApi();
       setIsLoading(true);
-      const users = await fetchUsers();
+      const users = await fetchAllUsers();
       setOptions(users);
       setIsLoading(false);
     }

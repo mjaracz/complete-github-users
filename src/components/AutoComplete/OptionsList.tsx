@@ -1,5 +1,6 @@
 import React, { MouseEvent } from 'react';
 import './OptionsList.css';
+import { Loader } from '../Loader';
 import clsx from 'clsx';
 
 export interface OptionsListProps<Option> {
@@ -7,6 +8,7 @@ export interface OptionsListProps<Option> {
   options: Option[];
   optionKey: keyof Option;
   onClickOption: (e: MouseEvent<HTMLLIElement>) => void;
+  isLoading: boolean;
 }
 
 export function OptionsList<Option>({
@@ -14,6 +16,7 @@ export function OptionsList<Option>({
   options,
   optionKey,
   onClickOption,
+  isLoading,
 }: OptionsListProps<Option>) {
   return (
     <ul
@@ -22,16 +25,22 @@ export function OptionsList<Option>({
         'autoComplete__optionsList--show': showOptions,
       })}
     >
-      {options.map((option, index) => (
-        <li
-          data-testid="optionsList__item"
-          key={`-${index}`}
-          className="optionsList__item"
-          onClick={onClickOption}
-        >
-          {option[optionKey]}
-        </li>
-      ))}
+      {isLoading || options.length === 0 ? (
+        <div className="optionsList__loader--container">
+          <Loader />
+        </div>
+      ) : (
+        options.map((option, index) => (
+          <li
+            data-testid="optionsList__item"
+            key={`-${index}`}
+            className="optionsList__item"
+            onClick={onClickOption}
+          >
+            {option[optionKey]}
+          </li>
+        ))
+      )}
     </ul>
   );
 }
