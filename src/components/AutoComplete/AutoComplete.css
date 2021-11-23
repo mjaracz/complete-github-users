@@ -15,7 +15,7 @@
     line-height: 1.5;
     overflow: hidden;
     width: 180px;
-    margin-bottom: 12px;
+    margin-bottom: 3px;
 }
 
 .autoComplete__textField > input,
@@ -103,7 +103,7 @@
 
 .autoComplete__textField > input:focus + span::after,
 .autoComplete__textField > textarea:focus + span::after {
-    transform: scale(1, 0.2);
+    transform: scale(1, 0.5);
 }
 
 .autoComplete__textField > input:disabled,
@@ -128,33 +128,4 @@
             transition-duration: 0.1s;
         }
     }
-}
-
-.autoComplete__optionsList {
-    transition: .4s;
-    position: relative;
-    display: block;
-    width: 180px;
-    max-height: 250px;
-    padding: 0;
-    margin: 0;
-    background-color: var(--secondary-color);
-    border-radius: 2px;
-}
-
-.optionsList__item {
-    width: 180px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 2px dashed var(--primary-color);
-    color: var(--background-color);
-    font-family: 'Ubuntu', sans-serif;
-    letter-spacing: 2px;
-    text-transform: full-size-kana;
-}
-
-.optionsList__item:last-child {
-    border-bottom: none;
 }

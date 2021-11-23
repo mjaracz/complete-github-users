@@ -1,24 +1,42 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { AutoCompleteProps } from './AutoComplete.model';
+import { OptionsList } from './OptionsList';
+import { useAutoComplete } from './useAutoComplete';
 import './AutoComplete.css';
 
 export function AutoComplete<Option>(
   props: AutoCompleteProps<Option, keyof Option>
 ) {
-  const [options, setOptions] = useState<Option[]>(props.options);
+  const {
+    label,
+    showOptions,
+    options,
+    refAutoComplete,
+    focusTextField,
+    filterOptions,
+    onClickOption,
+  } = useAutoComplete<Option>(props.options, props.optionKey);
+
   return (
-    <div className="autoComplete">
-      <label className="autoComplete__textField">
-        <input placeholder=" " />
+    <div
+      data-testid="autoComplete"
+      ref={refAutoComplete}
+      className="autoComplete"
+    >
+      <label
+        data-testid="autoComplete__textField"
+        onClick={focusTextField}
+        className="autoComplete__textField"
+      >
+        <input onChange={filterOptions} value={label} placeholder=" " />
         <span>provide username</span>
       </label>
-      <ul className="autoComplete__optionsList">
-        {options.map((option, index) => (
-          <li key={`-${index}`} className="optionsList__item">
-            {option[props.optionKey]}
-          </li>
-        ))}
-      </ul>
+      <OptionsList
+        options={options}
+        optionKey={props.optionKey}
+        showOptions={showOptions}
+        onClickOption={onClickOption}
+      />
     </div>
   );
 }

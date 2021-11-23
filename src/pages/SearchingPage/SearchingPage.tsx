@@ -1,20 +1,26 @@
 import React from 'react';
 import { AutoComplete } from '../../components/AutoComplete';
+import { Loader } from '../../components/Loader';
+import { useSearchingPage } from './useSearchingPage';
 import './SearchingPage.css';
 
-export interface Option {
-  user: string;
-  repo: string;
-}
-
 export const SearchingPage = () => {
-  const options: Option[] = [
-    { user: 'mjaracz', repo: 'example' },
-    { user: 'mjaracz', repo: 'example' },
-  ];
+  const { options, isLoading } = useSearchingPage();
+
   return (
-    <div className="searchingPage--container">
-      <AutoComplete options={options} optionKey="user" />
+    <div
+      data-testid="searchingPage--container"
+      className="searchingPage--container"
+    >
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <AutoComplete
+          data-testid="searchingPage__autoComplete"
+          options={options}
+          optionKey="login"
+        />
+      )}
     </div>
   );
 };

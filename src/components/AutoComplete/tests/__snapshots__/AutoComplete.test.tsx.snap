@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AutoComplete/> should match the snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="autoComplete"
+      data-testid="autoComplete"
+    >
+      <label
+        class="autoComplete__textField"
+        data-testid="autoComplete__textField"
+      >
+        <input
+          placeholder=" "
+          value=""
+        />
+        <span>
+          provide username
+        </span>
+      </label>
+      <ul
+        class="autoComplete__optionsList"
+      >
+        <li
+          class="optionsList__item"
+        >
+          exmaple
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+`;
