@@ -36,6 +36,7 @@ export const useAutoComplete = <Option>(
       setIsLoading(true);
       const users = await fetchUserByName(label);
       if (users.length > 0) setOptions(users);
+      console.log(users);
       setIsLoading(false);
     }
 
