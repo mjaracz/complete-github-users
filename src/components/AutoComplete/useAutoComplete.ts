@@ -30,11 +30,11 @@ export const useAutoComplete = <Option>(
   );
 
   useEffect(() => {
-    const { fetchUserByName } = usersApi();
+    const { fetchUserAndRepoByName } = usersApi();
 
     async function getAsyncUserByName() {
       setIsLoading(true);
-      const users = await fetchUserByName(label);
+      const users = await fetchUserAndRepoByName(label, '');
       if (users.length > 0) setOptions(users);
       console.log(users);
       setIsLoading(false);
